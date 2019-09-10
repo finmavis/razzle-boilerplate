@@ -1,22 +1,29 @@
 import express from 'express';
+import path from 'path';
 import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
+import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 
 import App from './App';
-
-const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 const server = express();
 server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/*', (req, res) => {
+    const extractor = new ChunkExtractor({
+      statsFile: path.resolve('build/loadable-stats.json'),
+      entrypoints: ['client'],
+    });
+
     const context = {};
     const markup = renderToString(
-      <StaticRouter context={context} location={req.url}>
-        <App />
-      </StaticRouter>,
+      <ChunkExtractorManager extractor={extractor}>
+        <StaticRouter context={context} location={req.url}>
+          <App />
+        </StaticRouter>
+      </ChunkExtractorManager>,
     );
 
     if (context.url) {
@@ -30,19 +37,12 @@ server
           <meta charset="utf-8" />
           <title>Welcome to Razzle</title>
           <meta name="viewport" content="width=device-width, initial-scale=1">
-          ${
-            assets.client.css
-              ? `<link rel="stylesheet" href="${assets.client.css}">`
-              : ''
-          }
-          ${
-            process.env.NODE_ENV === 'production'
-              ? `<script src="${assets.client.js}" defer></script>`
-              : `<script src="${assets.client.js}" defer crossorigin></script>`
-          }
+          ${extractor.getLinkTags()}
+          ${extractor.getStyleTags()}
         </head>
         <body>
           <div id="root">${markup}</div>
+          ${extractor.getScriptTags()}
         </body>
         </html>`,
       );
