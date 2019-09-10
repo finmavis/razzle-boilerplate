@@ -1,42 +1,95 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import logo from './react.svg';
+
 import './Home.css';
 
-class Home extends React.Component {
-  render() {
-    return (
-      <div className='Home'>
-        <Helmet>
-          <title>Razzle Boilerplate | Home</title>
-          <meta name='description' content='Lorem ipsum dolor amet' />
-        </Helmet>
-        <div className='Home-header'>
-          <img src={logo} className='Home-logo' alt='logo' />
-          <h2>Welcome to Razzle</h2>
-        </div>
-        <p className='Home-intro'>
-          To get started, edit <code>src/App.js</code> or{' '}
-          <code>src/Home.js</code> and save to reload.
-        </p>
-        <ul className='Home-resources'>
+export default function Home(props) {
+  return (
+    <div className='home'>
+      <Helmet>
+        <title>Razzle Boilerplate | Home</title>
+      </Helmet>
+      <div className='header'>
+        <h1>Razzle Boilerplate</h1>
+      </div>
+      <div className='feature'>
+        <ul>
           <li>
-            <Link to='/about'>Go to Tes</Link>
+            Server Side Rendering (Thanks to{' '}
+            <a
+              href='https://github.com/jaredpalmer/razzle'
+              rel='noopener noreferrer'
+              target='_blank'
+            >
+              Razzle
+            </a>{' '}
+            )
           </li>
           <li>
-            <a href='https://github.com/jaredpalmer/razzle'>Docs</a>
+            SEO Friendly (Thanks to{' '}
+            <a
+              href='https://github.com/nfl/react-helmet'
+              rel='noopener noreferrer'
+              target='_blank'
+            >
+              React Helmet
+            </a>{' '}
+            )
           </li>
           <li>
-            <a href='https://github.com/jaredpalmer/razzle/issues'>Issues</a>
+            Code Splitting (Thanks to{' '}
+            <a
+              href='https://github.com/smooth-code/loadable-components'
+              rel='noopener noreferrer'
+              target='_blank'
+            >
+              Loadable Component
+            </a>{' '}
+            )
+          </li>
+          <li>Gzip and Brotli compression</li>
+          <li>
+            Static type checking using{' '}
+            <a
+              href='https://github.com/facebook/create-react-app'
+              rel='noopener noreferrer'
+              target='_blank'
+            >
+              Eslint
+            </a>{' '}
+            and{' '}
+            <a
+              href='https://prettier.io/'
+              rel='noopener noreferrer'
+              target='_blank'
+            >
+              Prettier
+            </a>
           </li>
           <li>
-            <a href='https://palmer.chat'>Community Slack</a>
+            Pre-commit hooks using{' '}
+            <a
+              href='https://github.com/typicode/husky'
+              rel='noopener noreferrer'
+              target='_blank'
+            >
+              Husky
+            </a>{' '}
+            and{' '}
+            <a
+              href='https://github.com/okonet/lint-staged'
+              rel='noopener noreferrer'
+              target='_blank'
+            >
+              Lint Staged
+            </a>
           </li>
         </ul>
       </div>
-    );
-  }
+      <div className='navigate'>
+        <Link to='/about'>Go to About</Link>
+      </div>
+    </div>
+  );
 }
-
-export default Home;

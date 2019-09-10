@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import loadable from '@loadable/component';
 
-import './App.css';
+import './global.css';
 
 const Home = loadable(() => import('./Home'));
 const About = loadable(() => import('./About/About'));

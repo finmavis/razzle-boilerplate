@@ -1,0 +1,26 @@
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  font-size: 1.6rem;
+  background-color: #282c34;
+  color: #fff;
+}
+
+a,
+a:hover,
+a:focus,
+a:visited {
+  color: #fff;
+}
