@@ -7,6 +7,7 @@ import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
+import { Helmet } from 'react-helmet';
 
 import App from './App';
 
@@ -24,7 +25,7 @@ server
       statsFile: path.resolve('build/loadable-stats.json'),
       entrypoints: ['client'],
     });
-
+    const helmet = Helmet.renderStatic();
     const context = {};
     const markup = renderToString(
       <ChunkExtractorManager extractor={extractor}>
@@ -45,8 +46,10 @@ server
             <head>
               <meta http-equiv="X-UA-Compatible" content="IE=edge" />
               <meta charset="utf-8" />
-              <title>Welcome to Razzle</title>
+              ${helmet.title.toString()}
               <meta name="viewport" content="width=device-width, initial-scale=1">
+              ${helmet.meta.toString()}
+              ${helmet.link.toString()}
               ${extractor.getLinkTags()}
               ${extractor.getStyleTags()}
             </head>

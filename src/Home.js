@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import logo from './react.svg';
 import './Home.css';
 
@@ -7,6 +8,10 @@ class Home extends React.Component {
   render() {
     return (
       <div className='Home'>
+        <Helmet>
+          <title>Razzle Boilerplate | Home</title>
+          <meta name='description' content='Lorem ipsum dolor amet' />
+        </Helmet>
         <div className='Home-header'>
           <img src={logo} className='Home-logo' alt='logo' />
           <h2>Welcome to Razzle</h2>
@@ -17,7 +22,7 @@ class Home extends React.Component {
         </p>
         <ul className='Home-resources'>
           <li>
-            <Link to='/tes'>Go to Tes</Link>
+            <Link to='/about'>Go to Tes</Link>
           </li>
           <li>
             <a href='https://github.com/jaredpalmer/razzle'>Docs</a>
