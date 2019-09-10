@@ -16,7 +16,7 @@ server
   .use(
     expressStaticGzip(process.env.RAZZLE_PUBLIC_DIR, {
       enableBrotli: true,
-      orderPreference: ['br', 'gzip'],
+      orderPreference: ['br', 'gz'],
     }),
   )
   .get('/*', (req, res) => {
