@@ -12,7 +12,8 @@
     "lint:fix": "npm run lint -- --fix",
     "prettier": "prettier \"src/**/*.{js,jsx,json,css,scss,md,mdx}\"",
     "prettier:fix": "npm run prettier -- --write",
-    "validate": "npm run lint && npm run prettier -- --list-different"
+    "validate": "npm run lint && npm run prettier -- --list-different",
+    "postbuild": "purgecss --css build/public/static/css/*.css --content build/public/static/*.js build/public/static/js/*.js --out build/public/static/css"
   },
   "dependencies": {
     "@loadable/component": "^5.10.2",
@@ -42,9 +43,11 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "1.x",
+    "glob-all": "^3.1.0",
     "husky": "^3.0.5",
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2",
+    "purgecss-webpack-plugin": "^1.5.0",
     "razzle-plugin-compression": "^1.0.0"
   },
   "husky": {
