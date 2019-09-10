@@ -6,7 +6,12 @@
     "start": "razzle start",
     "build": "razzle build",
     "test": "razzle test --env=jsdom",
-    "start:prod": "NODE_ENV=production node build/server.js"
+    "start:prod": "NODE_ENV=production node build/server.js",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "prettier \"src/**/*.{js,jsx,json,css,scss,md,mdx}\"",
+    "prettier:fix": "npm run prettier -- --write",
+    "validate": "npm run lint && npm run prettier -- --list-different"
   },
   "dependencies": {
     "express": "^4.17.1",
@@ -14,5 +19,38 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@typescript-eslint/eslint-plugin": "1.x",
+    "@typescript-eslint/parser": "1.x",
+    "babel-eslint": "10.x",
+    "eslint": "6.x",
+    "eslint-config-prettier": "^6.2.0",
+    "eslint-config-react-app": "^5.0.1",
+    "eslint-plugin-flowtype": "3.x",
+    "eslint-plugin-import": "2.x",
+    "eslint-plugin-jsx-a11y": "6.x",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "7.x",
+    "eslint-plugin-react-hooks": "1.x",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
+    "prettier": "^1.18.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "npm run lint:fix",
+      "git add"
+    ],
+    "src/**/*.{js,jsx,json,css,scss,md,mdx}": [
+      "npm run prettier:fix",
+      "git add"
+    ]
   }
 }
