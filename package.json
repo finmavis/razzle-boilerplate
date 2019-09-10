@@ -16,7 +16,9 @@
   "dependencies": {
     "@loadable/component": "^5.10.2",
     "@loadable/server": "^5.10.2",
+    "common-tags": "^1.8.0",
     "express": "^4.17.1",
+    "express-static-gzip": "^2.0.5",
     "razzle": "^3.0.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -40,7 +42,8 @@
     "eslint-plugin-react-hooks": "1.x",
     "husky": "^3.0.5",
     "lint-staged": "^9.2.5",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "razzle-plugin-compression": "^1.0.0"
   },
   "husky": {
     "hooks": {

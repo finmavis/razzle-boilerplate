@@ -1,5 +1,8 @@
 import express from 'express';
 import path from 'path';
+import expressStaticGzip from 'express-static-gzip';
+import { html as htmlTemplate, oneLineTrim } from 'common-tags';
+
 import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
@@ -10,7 +13,12 @@ import App from './App';
 const server = express();
 server
   .disable('x-powered-by')
-  .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
+  .use(
+    expressStaticGzip(process.env.RAZZLE_PUBLIC_DIR, {
+      enableBrotli: true,
+      orderPreference: ['br', 'gzip'],
+    }),
+  )
   .get('/*', (req, res) => {
     const extractor = new ChunkExtractor({
       statsFile: path.resolve('build/loadable-stats.json'),
@@ -30,21 +38,24 @@ server
       res.redirect(context.url);
     } else {
       res.status(200).send(
-        `<!doctype html>
-        <html lang="en">
-        <head>
-          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-          <meta charset="utf-8" />
-          <title>Welcome to Razzle</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          ${extractor.getLinkTags()}
-          ${extractor.getStyleTags()}
-        </head>
-        <body>
-          <div id="root">${markup}</div>
-          ${extractor.getScriptTags()}
-        </body>
-        </html>`,
+        oneLineTrim(
+          htmlTemplate`
+            <!doctype html>
+            <html lang="en">
+            <head>
+              <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+              <meta charset="utf-8" />
+              <title>Welcome to Razzle</title>
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              ${extractor.getLinkTags()}
+              ${extractor.getStyleTags()}
+            </head>
+            <body>
+              <div id="root">${markup}</div>
+              ${extractor.getScriptTags()}
+            </body>
+            </html>`,
+        ),
       );
     }
   });
