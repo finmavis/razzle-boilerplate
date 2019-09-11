@@ -2,6 +2,7 @@ const path = require('path');
 const LoadableWebpackPlugin = require('@loadable/webpack-plugin');
 const LoadableBabelPlugin = require('@loadable/babel-plugin');
 const babelPresetRazzle = require('razzle/babel');
+const ImageminPlugin = require('imagemin-webpack');
 
 module.exports = {
   plugins: [
@@ -26,8 +27,9 @@ module.exports = {
     },
   ],
   modify: (config, { dev, target }) => {
-    // stay immutable here
+    // Stay immutable here
     const appConfig = Object.assign({}, config);
+    // Disabled source maps on Production
     appConfig.devtool = dev ? 'cheap-module-eval-source-map' : false;
 
     // Run client only
@@ -61,6 +63,63 @@ module.exports = {
       });
     }
 
+    // Run Production only
+    if (!dev) {
+      appConfig.plugins = [
+        ...appConfig.plugins,
+        // Optimized images on Production
+        new ImageminPlugin({
+          bail: false, // Ignore errors on corrupted images
+          cache: true,
+          imageminOptions: {
+            plugins: [
+              ['gifsicle', { interlaced: true }],
+              ['mozjpeg', { quality: 75, progressive: true }],
+              ['pngquant', { quality: [0.75, 0.75] }],
+              [
+                'svgo',
+                {
+                  plugins: [
+                    {
+                      cleanupAttrs: true,
+                      inlineStyles: true,
+                      removeDoctype: true,
+                      removeXMLProcInst: true,
+                      removeComments: true,
+                      removeMetadata: true,
+                      removeTitle: true,
+                      removeDesc: true,
+                      removeUselessDefs: true,
+                      removeXMLNS: false,
+                      removeEditorsNSData: true,
+                      removeEmptyAttrs: true,
+                      removeHiddenElems: true,
+                      removeEmptyText: true,
+                      removeEmptyContainers: true,
+                      removeViewBox: false,
+                      cleanupEnableBackground: true,
+                      minifyStyles: true,
+                      convertStyleToAttrs: true,
+                      removeUnknownsAndDefaults: true,
+                      removeUselessStrokeAndFill: true,
+                      removeUnusedNS: true,
+                      cleanupIDs: true,
+                      moveElemsAttrsToGroup: true,
+                      moveGroupAttrsToElems: true,
+                      collapseGroups: true,
+                      removeRasterImages: true,
+                      mergePaths: true,
+                      sortAttrs: true,
+                      removeScriptElement: true,
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        }),
+      ];
+    }
     return appConfig;
   },
 

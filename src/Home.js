@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
+import Image from './assets/images/room.jpg';
+import Icon from './assets/svg/bbq.svg';
+
 import './Home.css';
 
 export default function Home(props) {
