@@ -6,6 +6,12 @@ const ImageminPlugin = require('imagemin-webpack');
 
 module.exports = {
   plugins: [
+    /**
+     * Compress all bundle to Gzip and Brotli
+     * On compression process we optimize using razzle-plugin-compression
+     * Which under the hood using compression-webpack-plugin and brotli-webpack-plugin
+     * Docs: https://github.com/nimacsoft/razzle-plugin-compression
+     */
     {
       name: 'compression',
       options: {
@@ -73,9 +79,26 @@ module.exports = {
           cache: true,
           imageminOptions: {
             plugins: [
+              /**
+               * Optimized GIF using imagemin-gifsicle
+               * Docs: https://github.com/imagemin/imagemin-gifsicle
+               */
               ['gifsicle', { interlaced: true }],
+              /**
+               * Optimized JPG using imagemin-mozjpeg
+               * Docs: https://github.com/imagemin/imagemin-mozjpeg
+               */
               ['mozjpeg', { quality: 75, progressive: true }],
+              /**
+               * Optimized PNG using imagemin-mozjpeg
+               * Docs: https://github.com/imagemin/imagemin-pngquant
+               */
               ['pngquant', { quality: [0.75, 0.75] }],
+              /**
+               * Optimized SVG using imagemin-svgo
+               * Docs: https://github.com/imagemin/imagemin-svgo
+               * Playground to test config: https://jakearchibald.github.io/svgomg/
+               */
               [
                 'svgo',
                 {
