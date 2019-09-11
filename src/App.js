@@ -7,11 +7,11 @@ import './global.css';
 const Home = loadable(() => import('./Home'));
 const About = loadable(() => import('./About/About'));
 
-const App = () => (
-  <Switch>
-    <Route exact path='/' component={Home} />
-    <Route exact path='/about' component={About} />
-  </Switch>
-);
-
-export default App;
+export default function App() {
+  return (
+    <Switch>
+      <Route exact path='/' component={Home} />
+      <Route exact path='/about' component={About} />
+    </Switch>
+  );
+}
