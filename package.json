@@ -13,7 +13,8 @@
     "prettier": "prettier \"src/**/*.{js,jsx,json,css,scss,md,mdx}\"",
     "prettier:fix": "npm run prettier -- --write",
     "validate": "npm run lint && npm run prettier -- --list-different",
-    "postbuild": "purgecss --css build/public/static/css/*.css --content build/public/static/*.js build/public/static/js/*.js --out build/public/static/css"
+    "postbuild": "npm run optimize:css",
+    "optimize:css": "purgecss --css build/public/static/css/*.css --content build/public/static/js/*.js --out build/public/static/css"
   },
   "dependencies": {
     "@loadable/component": "^5.10.2",
