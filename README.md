@@ -87,6 +87,21 @@ To check `Javascript Linting` and `Prettier` rules on `Codebase`
 
 Optimize CSS Assets by removing unused CSS using [PurgeCSS](https://www.purgecss.com/)
 
+## Supported Browsers
+
+By default, the generated project supports all modern browsers. Support for Internet Explorer 9, 10, and 11 requires polyfills. If you still need to support these browsers, follow the instructions below.
+
+- Install react-app-polyfill:
+
+  `npm install react-app-polyfill` or `yarn add react-app-polyfill`
+
+- place one of the following lines at the very top of src/client.js:
+
+  ```
+  import 'react-app-polyfill/ie9'; // For IE 9-11 support
+  import 'react-app-polyfill/ie11'; // For IE 11 support
+  ```
+
 ## Other Resources
 
 - [Razzle](https://github.com/jaredpalmer/razzle)
