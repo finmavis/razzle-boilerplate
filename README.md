@@ -25,6 +25,7 @@ To start using this project :
 - Pre-commit hooks using [Husky](https://github.com/typicode/husky) and [Lint Staged](https://github.com/okonet/lint-staged)
 - Compression using Brotli and fallback to Gzip
 - Remove `source maps` on Production
+- Optimized images on Production build (Thanks to [Imagemin Webpack](https://github.com/itgalaxy/imagemin-webpack))
 
 ## Available Scripts
 
@@ -96,3 +97,4 @@ Optimize CSS Assets by removing unused CSS using [PurgeCSS](https://www.purgecss
 - [Prettier](https://prettier.io/)
 - [Husky](https://github.com/typicode/husky)
 - [Lint Staged](https://github.com/okonet/lint-staged)
+- [Imagemin Webpack](https://github.com/itgalaxy/imagemin-webpack)
