@@ -28,6 +28,7 @@ module.exports = {
   modify: (config, { dev, target }) => {
     // stay immutable here
     const appConfig = Object.assign({}, config);
+    appConfig.devtool = dev ? 'cheap-module-eval-source-map' : false;
 
     // Run client only
     if (target === 'web') {
