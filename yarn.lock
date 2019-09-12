@@ -9041,6 +9041,13 @@ razzle-plugin-compression@^1.0.0:
     brotli-webpack-plugin "^1.1.0"
     compression-webpack-plugin "^3.0.0"
 
+razzle-plugin-purgecss@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/razzle-plugin-purgecss/-/razzle-plugin-purgecss-1.0.1.tgz#dab5b5db1fbca051f7149fdb3d73a6252af04de1"
+  integrity sha512-gvXRr/1eO0w+2aTycMFz5J7htZIc6jM1v/BzswN6Llg/5eAMID8ep1Zws1vTO+ckoXmMjZ+Sqw6RO9YwxkCo9A==
+  dependencies:
+    purgecss-webpack-plugin "^1.5.0"
+
 razzle@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/razzle/-/razzle-3.0.0.tgz#317954313b63313c13c7015e2ab9de48077b9a98"

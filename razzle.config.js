@@ -1,13 +1,21 @@
 const path = require('path');
-const glob = require('glob');
 const LoadableWebpackPlugin = require('@loadable/webpack-plugin');
 const LoadableBabelPlugin = require('@loadable/babel-plugin');
 const babelPresetRazzle = require('razzle/babel');
 const ImageminPlugin = require('imagemin-webpack');
-const PurgecssPlugin = require('purgecss-webpack-plugin');
 
 module.exports = {
   plugins: [
+    /**
+     * Remove unused CSS on Production build using razzle-plugin-purgecss
+     * Docs: https://github.com/finmavis/razzle-plugin-purgecss
+     */
+    {
+      name: 'purgecss',
+      options: {
+        path: path.resolve(__dirname, 'src/**/*'),
+      },
+    },
     /**
      * Compress all bundle to Gzip and Brotli
      * On compression process we optimize using razzle-plugin-compression
@@ -79,15 +87,6 @@ module.exports = {
     if (isProduction) {
       appConfig.plugins = [
         ...appConfig.plugins,
-        /**
-         * Optimized all our css by Removing unused CSS using PurgeCSS
-         * Docs: https://www.purgecss.com/
-         */
-        new PurgecssPlugin({
-          paths: glob.sync(path.resolve(__dirname, 'src/**/*'), {
-            nodir: true,
-          }),
-        }),
         /**
          * Optimized all our images using imagemin-webpack
          * Docs: https://github.com/itgalaxy/imagemin-webpack
