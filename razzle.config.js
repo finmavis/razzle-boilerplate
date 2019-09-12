@@ -1,8 +1,10 @@
 const path = require('path');
+const glob = require('glob');
 const LoadableWebpackPlugin = require('@loadable/webpack-plugin');
 const LoadableBabelPlugin = require('@loadable/babel-plugin');
 const babelPresetRazzle = require('razzle/babel');
 const ImageminPlugin = require('imagemin-webpack');
+const PurgecssPlugin = require('purgecss-webpack-plugin');
 
 module.exports = {
   plugins: [
@@ -33,13 +35,16 @@ module.exports = {
     },
   ],
   modify: (config, { dev, target }) => {
+    const isProduction = dev === false;
+    const isWeb = target === 'web';
+
     // Stay immutable here
     const appConfig = Object.assign({}, config);
     // Disabled source maps on Production
     appConfig.devtool = dev ? 'cheap-module-eval-source-map' : false;
 
     // Run client only
-    if (target === 'web') {
+    if (isWeb) {
       const filename = path.resolve(__dirname, 'build');
 
       appConfig.plugins = [
@@ -70,10 +75,22 @@ module.exports = {
     }
 
     // Run Production only
-    if (!dev) {
+    if (isProduction) {
       appConfig.plugins = [
         ...appConfig.plugins,
-        // Optimized images on Production
+        /**
+         * Optimized all our css by Removing unused CSS using PurgeCSS
+         * Docs: https://www.purgecss.com/
+         */
+        new PurgecssPlugin({
+          paths: glob.sync(path.resolve(__dirname, 'src/**/*'), {
+            nodir: true,
+          }),
+        }),
+        /**
+         * Optimized all our images using imagemin-webpack
+         * Docs: https://github.com/itgalaxy/imagemin-webpack
+         */
         new ImageminPlugin({
           bail: false, // Ignore errors on corrupted images
           cache: true,
