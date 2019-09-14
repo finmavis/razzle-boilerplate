@@ -6,6 +6,10 @@ const ImageminPlugin = require('imagemin-webpack');
 
 module.exports = {
   plugins: [
+    /**
+     * Disable Source Maps on Production build using razzle-plugin-disable-sourcemaps-production
+     * Docs: https://github.com/finmavis/razzle-plugin-disable-sourcemaps-production
+     */
     'disable-sourcemaps-production',
     /**
      * Remove unused CSS on Production build using razzle-plugin-purgecss
