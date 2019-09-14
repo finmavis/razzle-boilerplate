@@ -20,12 +20,12 @@ To start using this project :
 - Server Side Rendering (thanks to [Razzle](https://github.com/jaredpalmer/razzle))
 - SEO Friendly (Thanks to [React Helmet](https://github.com/nfl/react-helmet))
 - Code Splitting (Thanks to [@loadable/component](https://github.com/smooth-code/loadable-components))
-- Remove unused CSS on `Post Build` Production (Thanks to [PurgeCSS](https://www.purgecss.com/))
-- Static type checking using [Eslint](https://www.npmjs.com/package/eslint-config-react-app) and [Prettier](https://prettier.io/)
+- Remove unused CSS on `Production build` (Thanks to [PurgeCSS](https://www.purgecss.com))
+- Static type system and a linter using [Eslint](https://www.npmjs.com/package/eslint-config-react-app) and [Prettier](https://prettier.io/)
 - Pre-commit hooks using [Husky](https://github.com/typicode/husky) and [Lint Staged](https://github.com/okonet/lint-staged)
-- Compression using Brotli and fallback to Gzip
-- Remove `source maps` on Production
-- Optimized images on Production build (Thanks to [Imagemin Webpack](https://github.com/itgalaxy/imagemin-webpack))
+- Compression using Brotli and fallback to Gzip (Thank to [Razzle Plugin Compression](https://github.com/nimacsoft/razzle-plugin-compression))
+- Disable `source maps` CSS and JS on `Production build` (Thanks to [Razzle Plugin Disable Source Maps Production](https://www.npmjs.com/package/razzle-plugin-disable-sourcemaps-production))
+- Optimized images on `Production build` (Thanks to [Imagemin Webpack](https://github.com/itgalaxy/imagemin-webpack))
 
 ## Available Scripts
 
