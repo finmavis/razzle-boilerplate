@@ -6,6 +6,7 @@ const ImageminPlugin = require('imagemin-webpack');
 
 module.exports = {
   plugins: [
+    'disable-sourcemaps-production',
     /**
      * Remove unused CSS on Production build using razzle-plugin-purgecss
      * Docs: https://github.com/finmavis/razzle-plugin-purgecss
@@ -44,13 +45,10 @@ module.exports = {
   ],
   modify: (config, { dev, target }) => {
     const isProduction = dev === false;
-    const isDevelopment = dev === true;
     const isWeb = target === 'web';
 
     // Stay immutable here
     const appConfig = Object.assign({}, config);
-    // Disabled source maps on Production
-    appConfig.devtool = isDevelopment ? 'cheap-module-eval-source-map' : false;
 
     // Run client only
     if (isWeb) {

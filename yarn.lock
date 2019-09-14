@@ -7572,7 +7572,7 @@ optimist@^0.6.1:
     minimist "~0.0.1"
     wordwrap "~0.0.2"
 
-optimize-css-assets-webpack-plugin@^5.0.1:
+optimize-css-assets-webpack-plugin@^5.0.1, optimize-css-assets-webpack-plugin@^5.0.3:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/optimize-css-assets-webpack-plugin/-/optimize-css-assets-webpack-plugin-5.0.3.tgz#e2f1d4d94ad8c0af8967ebd7cf138dcb1ef14572"
   integrity sha512-q9fbvCRS6EYtUKKSwI87qm2IxlyJK5b4dygW1rKUBT6mMDhdG5e5bZT63v6tnJR9F9FB/H5a0HTmtw+laUBxKA==
@@ -9040,6 +9040,14 @@ razzle-plugin-compression@^1.0.0:
   dependencies:
     brotli-webpack-plugin "^1.1.0"
     compression-webpack-plugin "^3.0.0"
+
+razzle-plugin-disable-sourcemaps-production@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/razzle-plugin-disable-sourcemaps-production/-/razzle-plugin-disable-sourcemaps-production-1.0.0.tgz#122a2c94cdebfbd63575b87782ed73a97b2fe7e8"
+  integrity sha512-clfDigacXollMyjLJkHrwGZBGDKpT0fqpnq79zKAmbKQ2nnX+huB+FfIvbViXg7ps+9YyHUBH1en7AOI81Wiog==
+  dependencies:
+    optimize-css-assets-webpack-plugin "^5.0.3"
+    postcss-safe-parser "^4.0.1"
 
 razzle-plugin-purgecss@^1.0.1:
   version "1.0.1"

@@ -51,6 +51,7 @@
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2",
     "razzle-plugin-compression": "^1.0.0",
+    "razzle-plugin-disable-sourcemaps-production": "^1.0.0",
     "razzle-plugin-purgecss": "^1.0.1"
   },
   "husky": {
