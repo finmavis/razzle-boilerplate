@@ -49,10 +49,11 @@ server
               ${helmet.title.toString()}
               <meta name="viewport" content="width=device-width, initial-scale=1">
               ${helmet.meta.toString()}
+              ${helmet.link.toString()}
               ${extractor.getLinkTags()}
               ${extractor.getStyleTags()}
             </head>
-            <body>
+            <body ${helmet.bodyAttributes.toString()}>
               <div id="root">${markup}</div>
               ${extractor.getScriptTags()}
             </body>
