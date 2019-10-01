@@ -24,7 +24,8 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@loadable/babel-plugin": "^5.10.0",
