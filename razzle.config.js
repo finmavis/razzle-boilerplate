@@ -58,13 +58,12 @@ module.exports = {
     if (isWeb) {
       const filename = path.resolve(__dirname, 'build');
 
-      appConfig.plugins = [
-        ...appConfig.plugins,
+      appConfig.plugins.push(
         new LoadableWebpackPlugin({
           outputAsset: false,
           writeToDisk: { filename },
         }),
-      ];
+      );
 
       appConfig.output.filename = dev
         ? 'static/js/[name].js'
@@ -87,8 +86,7 @@ module.exports = {
 
     // Run Production only
     if (isProduction) {
-      appConfig.plugins = [
-        ...appConfig.plugins,
+      appConfig.plugins.push(
         /**
          * Optimized all our images using imagemin-webpack
          * Docs: https://github.com/itgalaxy/imagemin-webpack
@@ -160,7 +158,7 @@ module.exports = {
             ],
           },
         }),
-      ];
+      );
     }
     return appConfig;
   },
