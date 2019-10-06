@@ -2,7 +2,9 @@ const path = require('path');
 const LoadableWebpackPlugin = require('@loadable/webpack-plugin');
 const LoadableBabelPlugin = require('@loadable/babel-plugin');
 const babelPresetRazzle = require('razzle/babel');
-const ImageminPlugin = require('imagemin-webpack');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const imageminMozjpeg = require('imagemin-mozjpeg');
+const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin');
 
 module.exports = {
   plugins: [
@@ -54,6 +56,38 @@ module.exports = {
     // Stay immutable here
     const appConfig = Object.assign({}, config);
 
+    // Search images rules index
+    const imageRuleIndex = appConfig.module.rules.findIndex(
+      rule =>
+        (rule.test && rule.test.toString().includes('.png')) ||
+        (rule.test && rule.test.toString().includes('.jpg?g')),
+    );
+
+    // Then override the default image rules
+    appConfig.module.rules[imageRuleIndex] = {
+      test: /\.(bmp|gif)$/,
+      loader: 'url-loader',
+      options: {
+        limit: 10000,
+        name: 'static/media/[name].[hash:8].[ext]',
+        emitFile: isWeb,
+      },
+    };
+
+    // Then add responsive loader to handle image file
+    appConfig.module.rules.push({
+      test: /\.(jpe?g|png)$/i,
+      loader: 'responsive-loader',
+      options: {
+        adapter: require('responsive-loader/sharp'),
+        name: 'static/media/[name].[hash:8].[width]w.[ext]',
+        sizes: [360, 576, 720, 1080, 1440],
+        placeholder: true,
+        placeholderSize: 10,
+        quality: 100,
+      },
+    });
+
     // Run client only
     if (isWeb) {
       const filename = path.resolve(__dirname, 'build');
@@ -84,82 +118,98 @@ module.exports = {
       });
     }
 
-    // Run Production only
     if (isProduction) {
       appConfig.plugins.push(
         /**
-         * Optimized all our images using imagemin-webpack
-         * Docs: https://github.com/itgalaxy/imagemin-webpack
+         * Optimized all our images using imagemin-webpack-plugin
+         * Docs: https://github.com/Klathmon/imagemin-webpack-plugin
          */
         new ImageminPlugin({
-          bail: false, // Ignore errors on corrupted images
-          cache: true,
-          imageminOptions: {
+          /**
+           * Optimized GIF using imagemin-gifsicle
+           * Docs: https://github.com/imagemin/imagemin-gifsicle
+           */
+          gifsicle: {
+            interlaced: true,
+            optimizationLevel: 1,
+          },
+          /**
+           * Optimized SVG using imagemin-svgo
+           * Docs: https://github.com/imagemin/imagemin-svgo
+           * Playground to test config: https://jakearchibald.github.io/svgomg/
+           */
+          svgo: {
             plugins: [
-              /**
-               * Optimized GIF using imagemin-gifsicle
-               * Docs: https://github.com/imagemin/imagemin-gifsicle
-               */
-              ['gifsicle', { interlaced: true }],
-              /**
-               * Optimized JPG using imagemin-mozjpeg
-               * Docs: https://github.com/imagemin/imagemin-mozjpeg
-               */
-              ['mozjpeg', { quality: 75, progressive: true }],
-              /**
-               * Optimized PNG using imagemin-mozjpeg
-               * Docs: https://github.com/imagemin/imagemin-pngquant
-               */
-              ['pngquant', { quality: [0.75, 0.75] }],
-              /**
-               * Optimized SVG using imagemin-svgo
-               * Docs: https://github.com/imagemin/imagemin-svgo
-               * Playground to test config: https://jakearchibald.github.io/svgomg/
-               */
-              [
-                'svgo',
-                {
-                  plugins: [
-                    {
-                      cleanupAttrs: true,
-                      inlineStyles: true,
-                      removeDoctype: true,
-                      removeXMLProcInst: true,
-                      removeComments: true,
-                      removeMetadata: true,
-                      removeTitle: true,
-                      removeDesc: true,
-                      removeUselessDefs: true,
-                      removeXMLNS: false,
-                      removeEditorsNSData: true,
-                      removeEmptyAttrs: true,
-                      removeHiddenElems: true,
-                      removeEmptyText: true,
-                      removeEmptyContainers: true,
-                      removeViewBox: false,
-                      cleanupEnableBackground: true,
-                      minifyStyles: true,
-                      convertStyleToAttrs: true,
-                      removeUnknownsAndDefaults: true,
-                      removeUselessStrokeAndFill: true,
-                      removeUnusedNS: true,
-                      cleanupIDs: true,
-                      moveElemsAttrsToGroup: true,
-                      moveGroupAttrsToElems: true,
-                      collapseGroups: true,
-                      removeRasterImages: true,
-                      mergePaths: true,
-                      sortAttrs: true,
-                      removeScriptElement: true,
-                    },
-                  ],
-                },
-              ],
+              {
+                cleanupAttrs: true,
+                inlineStyles: true,
+                removeDoctype: true,
+                removeXMLProcInst: true,
+                removeComments: true,
+                removeMetadata: true,
+                removeTitle: true,
+                removeDesc: true,
+                removeUselessDefs: true,
+                removeXMLNS: false,
+                removeEditorsNSData: true,
+                removeEmptyAttrs: true,
+                removeHiddenElems: true,
+                removeEmptyText: true,
+                removeEmptyContainers: true,
+                removeViewBox: false,
+                cleanupEnableBackground: true,
+                minifyStyles: true,
+                convertStyleToAttrs: true,
+                removeUnknownsAndDefaults: true,
+                removeUselessStrokeAndFill: true,
+                removeUnusedNS: true,
+                cleanupIDs: true,
+                moveElemsAttrsToGroup: true,
+                moveGroupAttrsToElems: true,
+                collapseGroups: true,
+                removeRasterImages: true,
+                mergePaths: true,
+                sortAttrs: true,
+                removeScriptElement: true,
+              },
             ],
           },
+          /**
+           * Optimized PNG using imagemin-mozjpeg
+           * Docs: https://github.com/imagemin/imagemin-pngquant
+           */
+          pngquant: { quality: [0.75, 0.75] },
+          plugins: [
+            /**
+             * Optimized JPG using imagemin-mozjpeg
+             * Docs: https://github.com/imagemin/imagemin-mozjpeg
+             */
+            imageminMozjpeg({
+              quality: 75,
+              progressive: true,
+            }),
+          ],
         }),
       );
     }
+
+    appConfig.plugins.push(
+      new ImageminWebpWebpackPlugin({
+        config: [
+          {
+            test: /\.(jpe?g|png)/,
+            options: {
+              quality: 80,
+            },
+          },
+        ],
+        overrideExtension: true,
+        detailedLogs: false,
+        silent: true,
+        strict: true,
+      }),
+    );
+
     return appConfig;
   },
 

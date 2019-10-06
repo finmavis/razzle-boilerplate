@@ -24,3 +24,12 @@ a:focus,
 a:visited {
   color: #fff;
 }
+
+img {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-bottom: 500px;
+  max-width: 500px;
+}
