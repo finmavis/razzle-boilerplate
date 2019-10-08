@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import expressStaticGzip from 'express-static-gzip';
 import { html as htmlTemplate, oneLineTrim } from 'common-tags';
+import compression from 'compression';
 
 import React from 'react';
 import { StaticRouter } from 'react-router-dom';
@@ -14,6 +15,7 @@ import App from './App';
 const server = express();
 server
   .disable('x-powered-by')
+  .use(compression())
   .use(
     expressStaticGzip(process.env.RAZZLE_PUBLIC_DIR, {
       enableBrotli: true,

@@ -63,6 +63,18 @@ module.exports = {
         (rule.test && rule.test.toString().includes('.jpg?g')),
     );
 
+    // Add ability to import svg as ReactComponent
+    appConfig.module.rules[1].use[0].options.plugins.push([
+      require.resolve('babel-plugin-named-asset-import'),
+      {
+        loaderMap: {
+          svg: {
+            ReactComponent: '@svgr/webpack?-svgo,+titleProp,+ref![path]',
+          },
+        },
+      },
+    ]);
+
     // Then override the default image rules
     appConfig.module.rules[imageRuleIndex] = {
       test: /\.(bmp|gif)$/,

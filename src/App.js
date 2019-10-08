@@ -10,6 +10,8 @@ import images2 from './assets/image-2.jpg';
 import images3 from './assets/image-3.jpg';
 import images4 from './assets/image-4.jpg';
 
+import { ReactComponent as Logo } from './assets/acorn.svg';
+
 import './global.css';
 
 const Home = loadable(() => import('./Home'));
@@ -28,6 +30,9 @@ export default function App() {
         <Route exact path='/' component={Home} />
         <Route exact path='/about' component={About} />
       </Switch>
+      <div className='logo-container'>
+        <Logo className='logo-svg' />
+      </div>
       <picture>
         <source
           type='image/webp'
