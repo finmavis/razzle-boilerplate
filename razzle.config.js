@@ -56,14 +56,11 @@ module.exports = {
     // Stay immutable here
     const appConfig = Object.assign({}, config);
 
-    // Search images rules index
-    const imageRuleIndex = appConfig.module.rules.findIndex(
-      rule =>
-        (rule.test && rule.test.toString().includes('.png')) ||
-        (rule.test && rule.test.toString().includes('.jpg?g')),
-    );
-
-    // Add ability to import svg as ReactComponent
+    /**
+     * Add ability to import svg as ReactComponent
+     * First we search rules for jsx config
+     * Then Add plugins options to use babel-plugin-named-asset-import and @svgr/webpack
+     */
     appConfig.module.rules[1].use[0].options.plugins.push([
       require.resolve('babel-plugin-named-asset-import'),
       {
@@ -74,6 +71,13 @@ module.exports = {
         },
       },
     ]);
+
+    // Search images rules index
+    const imageRuleIndex = appConfig.module.rules.findIndex(
+      rule =>
+        (rule.test && rule.test.toString().includes('.png')) ||
+        (rule.test && rule.test.toString().includes('.jpg?g')),
+    );
 
     // Then override the default image rules
     appConfig.module.rules[imageRuleIndex] = {
