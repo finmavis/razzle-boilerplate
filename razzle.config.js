@@ -198,6 +198,10 @@ module.exports = {
       );
     }
 
+    /**
+     * Add ability to convert png or jpeg images format to webp on Development and Production Mode
+     * Docs: https://github.com/iampava/imagemin-webp-webpack-plugin
+     */
     appConfig.plugins.push(
       new ImageminWebpWebpackPlugin({
         config: [
