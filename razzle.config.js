@@ -9,6 +9,11 @@ const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin');
 module.exports = {
   plugins: [
     /**
+     * Add ability to import svg as ReactComponent
+     * Docs: https://github.com/finmavis/razzle-plugin-svg-react-component
+     */
+    'svg-react-component',
+    /**
      * Disable Source Maps on Production build using razzle-plugin-disable-sourcemaps-production
      * Docs: https://github.com/finmavis/razzle-plugin-disable-sourcemaps-production
      */
@@ -55,22 +60,6 @@ module.exports = {
 
     // Stay immutable here
     const appConfig = Object.assign({}, config);
-
-    /**
-     * Add ability to import svg as ReactComponent
-     * First we search rules for jsx config
-     * Then Add plugins options to use babel-plugin-named-asset-import and @svgr/webpack
-     */
-    appConfig.module.rules[1].use[0].options.plugins.push([
-      require.resolve('babel-plugin-named-asset-import'),
-      {
-        loaderMap: {
-          svg: {
-            ReactComponent: '@svgr/webpack?-svgo,+titleProp,+ref![path]',
-          },
-        },
-      },
-    ]);
 
     // Search images rules index
     const imageRuleIndex = appConfig.module.rules.findIndex(
