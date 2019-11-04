@@ -5593,15 +5593,15 @@ imagemin-svgo@^7.0.0:
     is-svg "^3.0.0"
     svgo "^1.0.5"
 
-imagemin-webp-webpack-plugin@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/imagemin-webp-webpack-plugin/-/imagemin-webp-webpack-plugin-3.2.1.tgz#6d1e9918f35b2d3ad86a775c95eab2994aae85bd"
-  integrity sha512-dmeKB623voMPi/1uUTaMQccZ6/LoC8/jdSWr9s2KQj83lWuVKc7/a3pbZYLU6/IB4vbObwqkBGy10UjA6+zJvw==
+imagemin-webp-webpack-plugin@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/imagemin-webp-webpack-plugin/-/imagemin-webp-webpack-plugin-3.2.2.tgz#186edf3332e3b96e738fc7ef29a10f79f27a9e70"
+  integrity sha512-cPJNW1dbZpGaPzRc3ItbygLOedDmOHPZRVQJ0geAh99ZKqAqfow7WqKt881uOwFrc92kBvVHF/P1yHHrJd3NNQ==
   dependencies:
     imagemin "^6.1.0"
-    imagemin-webp "^5.0.0"
+    imagemin-webp "^5.1.0"
 
-imagemin-webp@^5.0.0:
+imagemin-webp@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/imagemin-webp/-/imagemin-webp-5.1.0.tgz#ddb1307ad97aff97293c5a600e384e40c07f68a7"
   integrity sha512-BsPTpobgbDPFBBsI3UflnU/cpIVa15qInEDBcYBw16qI/6XiB4vDF/dGp9l4aM3pfFDDYqR0mANMcKpBD7wbCw==
