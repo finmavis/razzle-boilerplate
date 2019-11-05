@@ -9560,10 +9560,10 @@ razzle-plugin-purgecss@^1.0.1:
   dependencies:
     purgecss-webpack-plugin "^1.5.0"
 
-razzle-plugin-svg-react-component@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/razzle-plugin-svg-react-component/-/razzle-plugin-svg-react-component-1.0.2.tgz#543f2760ab0afc7722fefcec9c7d04039c70ab21"
-  integrity sha512-439Yj2fElManj0yI+NCEUgxSNpPvVCOctlp4TPum7dcxBNH607eZQ+tLmJXz1MBM7/5ABwufQEV0y+FIAhUo/A==
+razzle-plugin-svg-react-component@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/razzle-plugin-svg-react-component/-/razzle-plugin-svg-react-component-1.0.3.tgz#451a174e3a64c9d12daf7c5a5d94eb8ccf6b80f8"
+  integrity sha512-vd279R/xuZSYkCqCrOcZlf/t9TMWRAlxHaRRuS2DdsYLoZIVUIrsYJ1a9ygyyL+Ff+gH4xsrEDeFIsZXXPTLGw==
   dependencies:
     "@svgr/webpack" "^4.3.3"
     babel-plugin-named-asset-import "^0.3.4"
