@@ -5634,10 +5634,10 @@ imagemin-svgo@^7.0.0:
     is-svg "^3.0.0"
     svgo "^1.0.5"
 
-imagemin-webp-webpack-plugin@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/imagemin-webp-webpack-plugin/-/imagemin-webp-webpack-plugin-3.2.2.tgz#186edf3332e3b96e738fc7ef29a10f79f27a9e70"
-  integrity sha512-cPJNW1dbZpGaPzRc3ItbygLOedDmOHPZRVQJ0geAh99ZKqAqfow7WqKt881uOwFrc92kBvVHF/P1yHHrJd3NNQ==
+imagemin-webp-webpack-plugin@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/imagemin-webp-webpack-plugin/-/imagemin-webp-webpack-plugin-3.3.0.tgz#63f35936a37e871a2fbb11eb75b4ec515f3b7dbf"
+  integrity sha512-CuKiiX7P3sposjbY3kMs+xww93jn9uLjv0vMXWVVOCsSgHMKt24MtBdPlvKwKB1kE4yy5bhhZ1XpCKkF+7t6vQ==
   dependencies:
     imagemin "^6.1.0"
     imagemin-webp "^5.1.0"
