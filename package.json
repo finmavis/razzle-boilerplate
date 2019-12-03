@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@loadable/component": "^5.11.0",
-    "@loadable/server": "^5.10.2",
+    "@loadable/server": "^5.11.0",
     "common-tags": "^1.8.0",
     "compression": "^1.7.4",
     "express": "^4.17.1",
