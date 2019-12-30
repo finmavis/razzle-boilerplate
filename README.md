@@ -11,9 +11,7 @@ To start using this project :
 3. Install all Dependencies, `yarn` or `npm install`
 4. Then for development just run the script `yarn start` or `npm run start`
 5. To build production just run the script `yarn build` or `npm run build`, it will generate folder build.
-6. To serve Production just run the script :
-   - `yarn start:prod`
-   - For windows platform `yarn start:prod:windows`
+6. To serve Production just run the script `yarn start:prod` or `npm run start:prod`
 
 ## Features
 
@@ -57,12 +55,6 @@ Runs the compiled app in production.
 
 You can again view your application at http://localhost:3000
 
-### `npm run start:prod:windows` or `yarn start:prod:windows`
-
-Runs the compiled app in production on `windows Platform`
-
-You can again view your application at http://localhost:3000
-
 ### `npm run lint` or `yarn lint`
 
 To check javascript linting rules.
@@ -82,10 +74,6 @@ To format or prettier codebase using `Prettier`
 ### `npm run validate` or `yarn validate`
 
 To check `Javascript Linting` and `Prettier` rules on `Codebase`
-
-### `npm run optimize:css` or `yarn optimize:css`
-
-Optimize CSS Assets by removing unused CSS using [PurgeCSS](https://www.purgecss.com/)
 
 ## Supported Browsers
 

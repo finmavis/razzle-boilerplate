@@ -27,7 +27,6 @@ server
       statsFile: path.resolve('build/loadable-stats.json'),
       entrypoints: ['client'],
     });
-    const helmet = Helmet.renderStatic();
     const context = {};
     const markup = renderToString(
       <ChunkExtractorManager extractor={extractor}>
@@ -36,6 +35,7 @@ server
         </StaticRouter>
       </ChunkExtractorManager>,
     );
+    const helmet = Helmet.renderStatic();
 
     if (context.url) {
       res.redirect(context.url);
