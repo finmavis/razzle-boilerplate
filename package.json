@@ -20,7 +20,7 @@
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "express-static-gzip": "^2.0.6",
-    "lazysizes": "^5.2.0",
+    "lazysizes": "^5.2.2",
     "razzle": "^3.0.0",
     "razzle-plugin-svg-react-component": "^1.0.3",
     "react": "^16.12.0",
